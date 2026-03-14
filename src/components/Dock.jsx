@@ -38,23 +38,26 @@ const Dock = () => {
             animatedIcons(e.clientX - left)
         }
 
-        const resetIcons = () => icons.forEach((icon) => gsap.to(icon, {
-            scale: 1,
-            y: 0,
-            duration: 0.3,
-            ease: "power1.out"
-        }))
+        const resetIcons = () => icons.forEach((icon) => {
+            gsap.to(icon, {
+                scale: 1,
+                y: 0,
+                duration: 0.3,
+                ease: "power1.out"
+            })
+        })
 
         dock.addEventListener("mousemove", handleMouseMove)
         dock.addEventListener("mouseleave", resetIcons)
 
         return () => {
             dock.removeEventListener("mousemove", handleMouseMove)
-            dock.removeEventListener("mousemove", resetIcons)
+            dock.removeEventListener("mouseleave", resetIcons)
         }
     }, [])
 
     const toggleApp = () => {
+        //TODO
     }
     return (
         <section id="dock">
