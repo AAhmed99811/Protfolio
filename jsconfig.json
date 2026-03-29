@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "include": [
-      "src"
-    ],
     "paths": {
       "#*": [
         "src/*"
       ]
-    }
-  }
+    },
+  },
+  "include": [
+    "src"
+  ],
 }

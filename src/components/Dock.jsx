@@ -1,11 +1,13 @@
-import React, {useRef} from 'react'
+import React, { useRef } from 'react'
 import gsap from "gsap";
-import {Tooltip} from "react-tooltip";
-import {useGSAP} from "@gsap/react";
+import { Tooltip } from "react-tooltip";
+import { useGSAP } from "@gsap/react";
 
-import {dockApps} from "#constants/index.js";
+import { dockApps } from "#constants/index.js";
+import useWindowStore from '#store/window';
 
 const Dock = () => {
+    const { openWindow, closeWindow, windows } = useWindowStore()
     const dockRef = useRef(null)
 
     useGSAP(() => {
@@ -16,10 +18,10 @@ const Dock = () => {
         const icons = dock.querySelectorAll(".dock-icon");
 
         const animatedIcons = (mouseX) => {
-            const {left} = dock.getBoundingClientRect();
+            const { left } = dock.getBoundingClientRect();
 
             icons.forEach((icon) => {
-                const {left: iconLeft, width} = icon.getBoundingClientRect();
+                const { left: iconLeft, width } = icon.getBoundingClientRect();
                 const center = iconLeft - left + width / 2
                 const distance = Math.abs(mouseX - center);
                 const intensity = Math.exp(-(distance ** 2.5) / 20000)
@@ -34,7 +36,7 @@ const Dock = () => {
         };
 
         const handleMouseMove = (e) => {
-            const {left} = dock.getBoundingClientRect();
+            const { left } = dock.getBoundingClientRect();
             animatedIcons(e.clientX - left)
         }
 
@@ -56,13 +58,21 @@ const Dock = () => {
         }
     }, [])
 
-    const toggleApp = () => {
-        //TODO
+    const toggleApp = (app) => {
+        if (!app.canOpen) return;
+
+        const window = windows[app.id]
+
+        if (window.isOpen) {
+            closeWindow(app.id)
+        } else {
+            openWindow(app.id)
+        }
     }
     return (
         <section id="dock">
             <div ref={dockRef} className="dock-container">
-                {dockApps.map(({id, name, icon, canOpen}) => (
+                {dockApps.map(({ id, name, icon, canOpen }) => (
                     <div key={id ?? name} className="relative flex justify-center">
                         <button
                             type="button"
@@ -72,7 +82,7 @@ const Dock = () => {
                             data-tooltip-content={name}
                             disabled={!canOpen}
                             onClick={() => {
-                                toggleApp({id, canOpen})
+                                toggleApp({ id, canOpen })
                             }}
                         >
                             <img
@@ -84,7 +94,7 @@ const Dock = () => {
                         </button>
                     </div>
                 ))}
-                <Tooltip id="dock-tooltip" className="tooltip" place="top"/>
+                <Tooltip id="dock-tooltip" className="tooltip" place="top" />
             </div>
         </section>
     )

@@ -1,13 +1,13 @@
-import React, {useRef} from 'react'
+import React, { useRef } from 'react'
 import gsap from "gsap";
-import {useGSAP} from "@gsap/react";
+import { useGSAP } from "@gsap/react";
 
 const FONT_WEIGHTS = {
-    "subTitle": {"min": 100, "max": 400, "default": 100},
-    "title": {"min": 400, "max": 900, "default": 400},
+    "subTitle": { "min": 100, "max": 400, "default": 100 },
+    "title": { "min": 400, "max": 900, "default": 400 },
 }
 
-const renderText = ({text, className, baseWeight = 400}) => {
+const renderText = ({ text, className, baseWeight = 400 }) => {
     return [...text].map((char, i) => (
         <span key={i} className={className} style={{
             fontVariationSettings: `'wght' ${baseWeight}`,
@@ -17,12 +17,12 @@ const renderText = ({text, className, baseWeight = 400}) => {
     ))
 }
 
-const setupTextHover = ({container, type}) => {
-    if (!container) return () => {};
+const setupTextHover = ({ container, type }) => {
+    if (!container) return () => { };
 
     const letters = container.querySelectorAll('span')
-    const {min, max, default: base} = FONT_WEIGHTS[type]
-    const animateLetters = ({letter, weight, duration = 0.25}) => {
+    const { min, max, default: base } = FONT_WEIGHTS[type]
+    const animateLetters = ({ letter, weight, duration = 0.25 }) => {
         return gsap.to(letter, {
             duration,
             ease: 'power2.out',
@@ -32,11 +32,11 @@ const setupTextHover = ({container, type}) => {
     }
 
     const handleMouseMove = (event) => {
-        const {left} = container.getBoundingClientRect();
+        const { left } = container.getBoundingClientRect();
         const mouseX = event.clientX - left;
 
         letters.forEach((letter) => {
-            const {left: l, width: w,} = letter.getBoundingClientRect();
+            const { left: l, width: w, } = letter.getBoundingClientRect();
             const distance = Math.abs(mouseX - (l - left + w / 2));
             const intensity = Math.exp(-(distance ** 2) / 20000)
 
@@ -46,17 +46,17 @@ const setupTextHover = ({container, type}) => {
             })
         })
     }
-    const handeMouseLeave = () => letters.forEach((letter) => animateLetters({
+    const handleMouseLeave = () => letters.forEach((letter) => animateLetters({
         letter,
         weight: base,
         duration: 0.3
     }))
     container.addEventListener('mousemove', handleMouseMove)
-    container.addEventListener('mouseleave', handeMouseLeave)
+    container.addEventListener('mouseleave', handleMouseLeave)
 
     return () => {
         container.removeEventListener('mousemove', handleMouseMove)
-        container.removeEventListener('mouseleave', handeMouseLeave)
+        container.removeEventListener('mouseleave', handleMouseLeave)
     }
 }
 
@@ -96,7 +96,7 @@ const Welcome = () => {
             </h1>
             <div className="small-screen">
                 <p>
-                    This portfolio is designed for desktop/tablets screen only.
+                    This portfolio is designed for desktop/tablets screens only.
                 </p>
             </div>
         </main>
