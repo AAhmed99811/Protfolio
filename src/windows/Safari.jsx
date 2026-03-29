@@ -20,6 +20,7 @@ const Safari = () => {
                         <Search className='icon' />
                         <input
                             type="text"
+                            aria-label="Search or enter the website name"
                             placeholder='Search or enter the website name'
                             className='flex-1'
                         />
@@ -51,7 +52,7 @@ const Safari = () => {
                                 <p>{date}</p>
                                 <h3>{title}</h3>
                                 <a href={link} target='_blank' rel='noopener noreferrer'>
-                                    Checkout the full post <MoveRight className='icon-hover' />
+                                    Check out the full post <MoveRight className='icon-hover' />
                                 </a>
                             </div>
                         </div>
