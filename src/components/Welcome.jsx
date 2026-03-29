@@ -80,7 +80,7 @@ const Welcome = () => {
         }
     }, []);
     return (
-        <main id="welcome">
+        <section id="welcome">
             <p ref={subTitleRef}>
                 {renderText({
                     "text": "Hey I'm Arham! Welcome to my",
@@ -99,7 +99,7 @@ const Welcome = () => {
                     This portfolio is designed for desktop/tablets screens only.
                 </p>
             </div>
-        </main>
+        </section>
     )
 }
 export default Welcome
