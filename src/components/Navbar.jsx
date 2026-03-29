@@ -15,11 +15,14 @@ const Navbar = () => {
                 <ul>
                     {
                         navLinks.map(({ id, name, type }) => (
-                            <li key={id} onClick={() => {
-                                console.log(type)
-                                openWindow(type)
-                            }}>
-                                <p>{name}</p>
+                            <li key={id}>
+                                <button
+                                    type="button"
+                                    onClick={() => openWindow(type)}
+                                    className="hover:underline"
+                                >
+                                    <p>{name}</p>
+                                </button>
                             </li>
                         ))
                     }

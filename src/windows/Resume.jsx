@@ -19,11 +19,17 @@ const Resume = () => {
             <div id='window-header'>
                 <WindowControls target="resume" />
                 <h2>Resume.pdf</h2>
-                <a href="/files/resume.pdf" download className='cursor-pointer' title='Download Resume'>
-                    <Download className='icons' />
+                <a
+                    href="/files/resume.pdf"
+                    download
+                    className='cursor-pointer'
+                    aria-label='Download Resume PDF'
+                    title='Download Resume'
+                >
+                    <Download className='icon' />
                 </a>
             </div>
-            <div className='h-[70%] overflow-y-auto'>
+            <div className='max-h-[70vh] overflow-y-auto'>
                 <Document file="/files/resume.pdf" className='pdf-viewer'>
                     <Page
                         pageNumber={1}
