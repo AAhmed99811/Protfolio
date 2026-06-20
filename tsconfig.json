@@ -1,13 +1,38 @@
 {
     "compilerOptions": {
-        "target": "ES2020",
+        "target": "ES2022",
+        "experimentalDecorators": true,
+        "useDefineForClassFields": false,
         "module": "ESNext",
-        "jsx": "react-jsx",
+        "lib": [
+            "ES2022",
+            "DOM",
+            "DOM.Iterable"
+        ],
+        "skipLibCheck": true,
+        "types": [
+            "node"
+        ],
         "moduleResolution": "bundler",
+        "isolatedModules": true,
+        "moduleDetection": "force",
+        "allowJs": true,
+        "jsx": "react-jsx",
+        "allowImportingTsExtensions": true,
+        "noEmit": true,
         "baseUrl": ".",
         "paths": {
+            "#/*": [
+                "./src/*"
+            ],
+            "#components": [
+                "src/components/index.js"
+            ],
             "#components/*": [
                 "src/components/*"
+            ],
+            "#constants": [
+                "src/constants/index.js"
             ],
             "#constants/*": [
                 "src/constants/*"
@@ -18,8 +43,17 @@
             "#hoc/*": [
                 "src/hoc/*"
             ],
+            "#windows": [
+                "src/windows/index.js"
+            ],
             "#windows/*": [
                 "src/windows/*"
+            ],
+            "#utility": [
+                "src/utility/index.js"
+            ],
+            "#utility/*": [
+                "src/utility/*"
             ]
         }
     },
