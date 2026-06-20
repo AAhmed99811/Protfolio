@@ -3,7 +3,7 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import type { Location } from "#/types";
 
-const DEFAULT_LOCATION: Location = locations?.work;
+const DEFAULT_LOCATION: Location | null = locations?.work ?? null;
 
 type state = {
     activeLocation: Location | null;
@@ -13,7 +13,7 @@ type state = {
 
 const useLocationStore = create<state>()(immer((set) => ({
     activeLocation: DEFAULT_LOCATION,
-    setActiveLocation: (location: typeof DEFAULT_LOCATION | null = null) => set((state) => {
+    setActiveLocation: (location: Location | null = null) => set((state) => {
         state.activeLocation = location
     }),
     resetActiveLcoation: () => set((state) => {
